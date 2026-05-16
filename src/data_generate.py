@@ -128,10 +128,8 @@ def generate_motor_data(n_per_motor=1000, seed=42):
                 fault_type = "正常"
             elif risk_score == 1:
                 status = "预警"
-                fault_type = "预警"
             else:
                 status = "故障"
-                fault_type = "故障"
 
             all_records.append({
                 "timestamp": timestamp,
