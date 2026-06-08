@@ -105,3 +105,17 @@ python src/cwru_cnn_crossload.py   # 1D-CNN 跨负载泛化评估
 > 注:深度学习脚本需额外安装 PyTorch(`pip install torch --index-url https://download.pytorch.org/whl/cu124`,CUDA 版可用 GPU 加速;无显卡可装 CPU 版)。
 
 结果图保存在 `outputs/figures/cwru_*.png`,文字报告在 `outputs/reports/cwru_*.md`。
+
+## 6. 在线诊断看板(上传信号 → 实时诊断)
+
+训练好的模型不止能离线评估,还封装成了一个可交互的诊断工具:上传一段电机驱动端振动信号,实时输出轴承故障类型与各类别置信度。
+
+```bash
+python -m streamlit run app/cwru_diagnosis_app.py
+```
+
+- **输入**:`.mat`(CWRU 原始文件,含 `*_DE_time` 信号)或 `.csv`(单列振动幅值,可带表头)。`data/cwru/` 下任一 `.mat` 文件可直接上传试用。
+- **流程**:信号按 2048 点分段 → 每段提取 17 维时频域特征 → 随机森林逐段预测 → 多段平均概率得出最终故障类型与置信度。
+- **输出**:诊断结论、四类置信度条形图、上传信号波形预览。
+- **代码结构**:诊断逻辑在 `src/cwru_inference.py`(与界面解耦,可单独命令行调用与测试),界面在 `app/cwru_diagnosis_app.py`。
+
