@@ -1,5 +1,10 @@
 pandas
 numpy
+scipy
 matplotlib
 scikit-learn
 streamlit
+# 深度学习部分(cwru_cnn.py)需要 PyTorch,单独安装以选择 CPU/GPU 版本:
+#   GPU(CUDA12.4): pip install torch --index-url https://download.pytorch.org/whl/cu124
+#   CPU:           pip install torch
+torch

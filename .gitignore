@@ -43,9 +43,14 @@ Thumbs.db
 data/raw/*
 data/processed/*
 
+# CWRU 原始振动数据(约 67MB,16 个 .mat 文件)
+# 不入库:体积大,且可用 `python src/cwru_download.py` 一行命令从官网脚本化重下
+data/cwru/*
+
 # 但保留文件夹结构
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+!data/cwru/.gitkeep
 
 # sample 文件夹可以放小样例数据，建议保留
 # data/sample/ 不忽略
@@ -63,6 +68,10 @@ outputs/models/*
 !outputs/reports/.gitkeep
 !outputs/models/.gitkeep
 
+# 例外:CWRU 关键结果图与文字报告入库,供 GitHub README 展示(体积小、是项目门面)
+!outputs/figures/cwru_*.png
+!outputs/reports/cwru_*.md
+
 # =========================
 # 机器学习模型文件
 # =========================
@@ -75,3 +84,10 @@ outputs/models/*
 # 环境变量文件
 # =========================
 .env
+
+# =========================
+# 不公开到 GitHub 的个人文件(本地保留)
+# 面试问答稿是个人备战底牌,公开会让面试官看到"标准答案";新手指南是个人笔记
+# =========================
+docs/resume_and_interview.md
+新手指南.md
